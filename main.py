@@ -135,13 +135,14 @@ class GenerateTrajectory:
 
         fig.show()
 
-rent = Expense("Rent", 1550, "monthly", "2024 04 01")
-food = Expense("Food", 400, "monthly", "2024 04 01")
-work = Income("Work", 820, "weekly", "2024 04 03")
-tours = Income("Tours", 200, "biweekly", "2024 04 01")
-other_expenses = Expense("Other", 200, "monthly", "2024 04 01")
+rent = Expense("Rent", 1300, "monthly", "2024 09 01")
+food = Expense("Food", 400, "monthly", "2024 09 01")
+work = Income("Work", 816.07, "weekly", "2024 09 03")
+tours = Income("Tours", 200, "biweekly", "2024 09 01")
+other_expenses = Expense("Other", 200, "monthly", "2024 09 01")
+
 
 if __name__ == "__main__":
-    sheet1 = BudgetSheet([rent, food, work, tours, other_expenses], "2024 04 01", "2024 08 31")
+    sheet1 = BudgetSheet([rent, food, work, tours, other_expenses], "2024 09 01", "2024 12 31")
     sheet1.create_budget_sheet()
-    GenerateTrajectory(sheet1, 3100, 1, 1, 1).plot_trajectory()
+    GenerateTrajectory(sheet1, 0, 1, 1, 1).plot_trajectory()
