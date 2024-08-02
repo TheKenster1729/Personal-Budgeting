@@ -104,12 +104,14 @@ class BudgetSheet:
         return unpacked_items_df
 
 class GenerateTrajectory:
-    def __init__(self, budget_sheet, starting_account_balance, food_level, amenities_level, savings_level,
+    def __init__(self, budget_sheet, starting_account_balance, food_level = 0, amenities_level = 0, savings_level = 0,
                  trajectory_interval = 1):
         self.start_date = budget_sheet.timestamp_start_date
         self.end_date = budget_sheet.timestamp_end_date
         self.starting_balance = starting_account_balance
         self.food_level = food_level
+        self.amenities_level = amenities_level
+        self.savings_level = savings_level
 
         # adding in starting balance as an income and ordering by date
         starting_balance_df = pd.DataFrame([[self.start_date, "Income", self.starting_balance, None]], 
@@ -135,14 +137,12 @@ class GenerateTrajectory:
 
         fig.show()
 
-rent = Expense("Rent", 1300, "monthly", "2024 09 01")
-food = Expense("Food", 400, "monthly", "2024 09 01")
-work = Income("Work", 816.07, "weekly", "2024 09 03")
-tours = Income("Tours", 200, "biweekly", "2024 09 01")
+rent = Expense("Rent", 1200, "monthly", "2024 09 01")
+food = Expense("Food", 200, "monthly", "2024 09 01")
+work = Income("Work", 1000, "weekly", "2024 09 03")
 other_expenses = Expense("Other", 200, "monthly", "2024 09 01")
 
-
 if __name__ == "__main__":
-    sheet1 = BudgetSheet([rent, food, work, tours, other_expenses], "2024 09 01", "2024 12 31")
+    sheet1 = BudgetSheet([rent, food, work, other_expenses], "2024 09 01", "2024 12 31")
     sheet1.create_budget_sheet()
-    GenerateTrajectory(sheet1, 0, 1, 1, 1).plot_trajectory()
+    GenerateTrajectory(sheet1, 5000).plot_trajectory()
